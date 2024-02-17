@@ -1,0 +1,93 @@
+*{
+    margin:0;
+    padding: 0;
+}
+.title{
+    color:rebeccapurple;
+    font-size: 40px;
+    font-weight: 600;
+}
+
+.title-section{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.product-create-section{
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.form-create-product{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 45%;
+}
+
+.button-create-product{
+    display: flex;
+    background-color: blueviolet;
+    color:white;
+    border-radius: 10px;
+    width: 150px;
+    padding: 10px 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-form-input{
+    border-radius: 10px;
+    padding-left: 5px;
+    height: 40px;
+    border: 1px solid gray;
+}
+
+.navigation{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    background-color: rgb(64, 56, 72);
+}
+
+.clear-link{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.nav-left{
+    display: flex;
+    column-gap: 10px;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.nav-right{
+    display: flex;
+    column-gap: 5px;
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.logout-button{
+    padding: 5px;
+    color:blue;
+}
+
+.success-message{
+    background-color: rgb(39, 129, 39);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}

@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,12 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $products = Product::latest()->get();
+    //$products = Product::all();
+    //$products = DB::select('SELECT * FROM `products` order by created_at desc;');
+    
+    //return view('front.landing')->with('products', $products);
+    return view('front.landing', compact('products'));
 });
 
 Route::get('/dashboard', function () {

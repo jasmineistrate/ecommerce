@@ -28,13 +28,17 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $request->validate([
+            'image'=>'required'
+        ]);
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('productImages'), $imageName);
         Product::create([
             'title'=>$request->title,
             'description'=>$request->description,
             'price'=>floatval($request->price),
-            'color'=>$request->color,
-            'image'=>$request->image
+            'image'=>$imageName,
+            'color'=>$request->color
         ]);
         return back()->with('success', 'the record has been added');
     }

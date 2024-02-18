@@ -1,14 +1,15 @@
 @extends('layouts.admin')
 @section('content')
 <div class="title-section">
-    <div class="title">Create Product</div>
+    <div class="title">Edit Product</div>
 </div>
 <div class="product-create-section">
-    <form class="form-create-product" action="{{route('store.product')}}" method="POST" enctype="multipart/form-data">
+    <form class="form-create-product" action="{{route('admin.product.update', $product->id)}}" method="POST" enctype="multipart/form-data">
         @csrf
-        <input type="text" placeholder="title" name="title" class="create-form-input">
-        <input type="text" placeholder="price" name="price" class="create-form-input">
-        <input type="text" placeholder="color" name="color" class="create-form-input">
+        @method('PUT');
+        <input type="text" placeholder="title" name="title" class="create-form-input" value="{{$product->title}}">
+        <input type="text" placeholder="price" name="price" class="create-form-input" value="{{$product->price}}">
+        <input type="text" placeholder="color" name="color" class="create-form-input" value="{{$product->color}}">
         <script>
             tinymce.init({
                 selector: 'textarea',
@@ -23,8 +24,8 @@
                 ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
             });
         </script>
-        <textarea name="description">
-
+        <textarea name="description" >
+            {{$product->description}}
         </textarea>
         <input type="file" name="image">
         <button class="button-create-product" type="submit">Submit</button>

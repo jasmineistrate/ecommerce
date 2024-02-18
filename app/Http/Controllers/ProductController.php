@@ -12,7 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::latest()->get();
+        return view('back.product.index')->with('products', $products);
     }
 
     /**
@@ -40,38 +41,65 @@ class ProductController extends Controller
             'image'=>$imageName,
             'color'=>$request->color
         ]);
-        return back()->with('success', 'the record has been added');
+        return redirect(route('admin.products'))->with('success', 'The product has been created');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return view('back.product.show', compact('product'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        return view('back.product.edit', compact('product'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $product = Product::find($id);
+        if($request->image){
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('productImages'), $imageName);
+        }
+        if($request->image){
+            $product->update([
+                'title'=>$request->title,
+                'description'=>$request->description,
+                'price'=>floatval($request->price),
+                'image'=>$imageName,
+                'color'=>$request->color
+            ]);
+        }
+        else
+        {
+            $product->update([
+                'title'=>$request->title,
+                'description'=>$request->description,
+                'price'=>floatval($request->price),
+                'color'=>$request->color
+            ]);
+        }
+        return redirect(route('admin.products'))->with('success', 'The product has been updated');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
+    public function delete($id)
     {
-        //
+        $product = Product::find($id);
+        $product->delete();
+        return redirect(route('admin.products'))->with('success', 'The product has been deleted');
     }
 }

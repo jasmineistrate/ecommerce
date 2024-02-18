@@ -11,12 +11,27 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href= "{{asset('/css/style.css')}}">
+        <script src="https://cdn.tiny.cloud/1/byv6maqck2gq4i6qw14bniqs5ue3hnvb3u9b58xyazdruv1o/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
     </head>
     <body class="font-sans antialiased">
             @if(session()->has('success'))
             <div class="success-message">
                 {{ session()->get('success') }}
+            </div>
+            @endif
+            @if ($errors->any())
+            <div class="error-message">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            </div>
+            @endif
+            @if (session('error'))
+            <div class="error-message">
+            {{ session('error') }}
             </div>
             @endif
         @include('layouts.navigation')

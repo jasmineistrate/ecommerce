@@ -31,8 +31,8 @@
                     @method('DELETE')
                     <button class="button-icon"><img src="{{asset('/icons/delete.png')}}" class="icon-image" alt=""></button>
                 </form>
-                <a href="" class=""><img src="{{asset('/icons/edit.png')}}" class="icon-image" alt=""></a>
-                <a href="" class=""><img src="{{asset('/icons/show.png')}}" class="icon-image" alt=""></a>
+                <a href="{{route('admin.edit', $user)}}"><img src="{{asset('/icons/edit.png')}}" class="icon-image" alt=""></a>
+                <a href="{{route('admin.show.user', $user->id)}}" ><img src="{{asset('/icons/show.png')}}" class="icon-image" alt=""></a>
             </div>
             </li>
             @endforeach

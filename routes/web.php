@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 use App\Models\Product;
 
 /*
@@ -43,6 +44,18 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users');
         Route::get('/admin/create/user', [UserController::class, 'create'])->name('admin.create');
         Route::post('/admin/store/user', [UserController::class, 'store'])->name('admin.store');
+        Route::get('/admin/edit/user/{user}', [UserController::class, 'edit'])->name('admin.edit');
+        Route::put('/admin/user/update/{id}', [UserController::class, 'update'])->name('admin.update.user');
+        Route::get('/admin/user/show/{id}', [UserController::class, 'show'])->name('admin.show.user');
+
+        Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.order');
+        Route::get('/admin/create/order', [OrderController::class, 'create'])->name('admin.create.order');
+        Route::post('/admin/store/order', [OrderController::class, 'store'])->name('admin.store.order');
+        Route::delete('/admin/delete/order/{id}', [OrderController::class, 'delete'])->name('admin.delete.order');
+        Route::get('/admin/edit/order/{id}', [OrderController::class, 'edit'])->name('admin.edit.order');
+        Route::put('/admin/update/order/{id}', [OrderController::class, 'update'])->name('admin.update.order');
+        Route::get('/admin/show/order/{id}', [OrderController::class, 'show'])->name('admin.show.order');
+
     });
 });
 

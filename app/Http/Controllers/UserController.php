@@ -38,12 +38,17 @@ class UserController extends Controller
                 'password'=>'required|min:8|max:255',
                 'confirmPassword'=>'required|min:8|max:255'
             ]);
+            if($request->image){
+                $imageName = time().'.'.$request->image->extension();
+                $request->image->move(public_path('productImages'), $imageName);
+            }
             $intIsAdmin = intval($request->isAdmin);
             $criptedPassword = Hash::make($request->password);
             User::create([
                 'name'=>$request->name,
                 'email'=>$request->email,
                 'password'=>$criptedPassword,
+                'image'=>$imageName,
                 'isAdmin'=>$intIsAdmin
             ]);
             return redirect(route('admin.users'))->with('succes', 'The user has been created');
@@ -59,15 +64,18 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('back.users.show', compact('user'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $user)
     {
-        //
+        //dd($user);
+        //$user = User::find($user->id);
+        return view('back.users.edit', compact('user'));
     }
 
     /**
@@ -75,7 +83,32 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        if($request->password === $request->confirmPassword)
+        {
+            $user = User::find($id);
+            if($request->image){
+                $imageName = time().'.'.$request->image->extension();
+                $request->image->move(public_path('productImages'), $imageName);
+            }
+            $request->validate([
+                ///'image'=>'mimes:jpeg,png,jpg,gif',
+                'email'=>'email|max:255',
+            ]);
+            $intIsAdmin = intval($request->isAdmin);
+            $criptedPassword = Hash::make($request->password);
+            $user->update([
+                'name'=>$request->name,
+                'password'=>$criptedPassword,
+                'email'=>$request->email,
+                'isAdmin'=>$intIsAdmin,
+                'image'=>$imageName
+            ]);
+            return redirect(route('admin.users'))->with('success', 'The user has been updated');
+        }
+        else
+        {
+            return redirect()->back()->with('error', 'The password does not match');
+        }
     }
 
     /**

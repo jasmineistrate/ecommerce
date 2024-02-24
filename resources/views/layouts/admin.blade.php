@@ -13,6 +13,7 @@
         <link rel="stylesheet" href= "{{asset('/css/style.css')}}">
         <script src="https://cdn.tiny.cloud/1/byv6maqck2gq4i6qw14bniqs5ue3hnvb3u9b58xyazdruv1o/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
+        <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="font-sans antialiased">
             @if(session()->has('success'))

@@ -41,17 +41,29 @@ class UserController extends Controller
             if($request->image){
                 $imageName = time().'.'.$request->image->extension();
                 $request->image->move(public_path('productImages'), $imageName);
-            }
-            $intIsAdmin = intval($request->isAdmin);
-            $criptedPassword = Hash::make($request->password);
-            User::create([
-                'name'=>$request->name,
-                'email'=>$request->email,
-                'password'=>$criptedPassword,
-                'image'=>$imageName,
-                'isAdmin'=>$intIsAdmin
+                $intIsAdmin = intval($request->isAdmin);
+                $criptedPassword = Hash::make($request->password);
+                User::create([
+                    'name'=>$request->name,
+                    'email'=>$request->email,
+                    'password'=>$criptedPassword,
+                    'image'=>$imageName,
+                    'isAdmin'=>$intIsAdmin
             ]);
-            return redirect(route('admin.users'))->with('succes', 'The user has been created');
+            return redirect(route('admin.users'))->with('success', 'The user has been created with image');
+            }
+            else
+            {
+                $intIsAdmin = intval($request->isAdmin);
+                $criptedPassword = Hash::make($request->password);
+                User::create([
+                    'name'=>$request->name,
+                    'email'=>$request->email,
+                    'password'=>$criptedPassword,
+                    'isAdmin'=>$intIsAdmin
+                ]);
+                return redirect(route('admin.users'))->with('success', 'The user has been created without image');
+            }
         }
         else
         {
@@ -114,8 +126,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function delete(string $id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+        return redirect(route('admin.users'))->with('success', 'The user has been deleted');
     }
 }

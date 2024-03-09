@@ -249,6 +249,7 @@
   .navbar {
     background-color: #333;
     overflow: hidden;
+    height: 50px;
   }
   .navbar a {
     float: left;
@@ -302,4 +303,12 @@
     height: 100%;
     display: flex;
     align-items: center;
+    display: flex;
+    width: 150px;
+  }
+
+  .register-login{
+    display: flex;
+    justify-content: end;
+    height: 100%;
   }

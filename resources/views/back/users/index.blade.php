@@ -26,7 +26,7 @@
             <div class="col col-4" data-label="Payment Status">{{$user->created_at}}</div>
             <div class="col col-4" data-label="Payment Status">{{$user->updated_at}}</div>
             <div class="col col-4" id="action-icons">
-                <form action="" method="POST">
+                <form action="{{route('admin.delete.user', $user->id)}}" method="POST">
                     @csrf 
                     @method('DELETE')
                     <button class="button-icon"><img src="{{asset('/icons/delete.png')}}" class="icon-image" alt=""></button>

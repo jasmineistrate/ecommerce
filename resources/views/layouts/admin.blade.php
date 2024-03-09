@@ -11,8 +11,9 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
         <link rel="stylesheet" href= "{{asset('/css/style.css')}}">
+        <link rel="stylesheet" href= "{{asset('/css/cartStyle.css')}}">
+        <link rel="stylesheet" href= "{{asset('/css/checkout.css')}}">
         <script src="https://cdn.tiny.cloud/1/byv6maqck2gq4i6qw14bniqs5ue3hnvb3u9b58xyazdruv1o/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="font-sans antialiased">
@@ -37,5 +38,15 @@
             @endif
         @include('layouts.navigation')
         @yield('content')
+        <a class="cart-icon-link" href="{{route('cart.index')}}">
+            <div class="cart-parent">
+                <img class="cart-icon-image" src="{{asset('/icons/cart.png')}}" alt="">
+                @if(Cart::name('shopping')->getDetails()->items_count)
+                <div class="cart-items-count">
+                    <div class="items-count text-white text-sm" >{{Cart::name('shopping')->getDetails()->items_count}}</div>
+                </div>
+                @endif
+            </div>
+        </a>
     </body>
 </html>

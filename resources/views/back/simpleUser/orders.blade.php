@@ -14,7 +14,6 @@
             <div class="col col-4">Country</div>
             <div class="col col-4">Status</div>
             <div class="col col-4">Created_at</div>
-            <div class="col col-4">Action</div>
             </li>
             @foreach($orders as $order)
             <li class="table-row">
@@ -27,15 +26,6 @@
             <div class="col col-4" data-label="Amount">{{$order->country}}</div>
             <div class="col col-4" data-label="Amount">{{$order->status}}</div>
             <div class="col col-4" data-label="Amount">{{$order->created_at}}</div>
-            <div class="col col-4" id="action-icons">
-                <form action="{{route('admin.delete.order', $order->id)}}" method="POST">
-                    @csrf 
-                    @method('DELETE')
-                    <button class="button-icon"><img src="{{asset('/icons/delete.png')}}" class="icon-image" alt=""></button>
-                </form>
-                <a href="{{route('admin.edit.order', $order->id)}}" class=""><img src="{{asset('/icons/edit.png')}}" class="icon-image" alt=""></a>
-                <!--<a href="{{route('admin.show.order', $order->id)}}" class=""><img src="{{asset('/icons/show.png')}}" class="icon-image" alt=""></a>-->
-            </div>
             </li>
             @endforeach
         </ul>

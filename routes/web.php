@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Models\Product;
 
 /*
@@ -47,6 +49,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/edit/user/{user}', [UserController::class, 'edit'])->name('admin.edit');
         Route::put('/admin/user/update/{id}', [UserController::class, 'update'])->name('admin.update.user');
         Route::get('/admin/user/show/{id}', [UserController::class, 'show'])->name('admin.show.user');
+        Route::delete('/admin/user/delete/{id}', [UserController::class, 'delete'])->name('admin.delete.user');
 
         Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.order');
         Route::get('/admin/create/order', [OrderController::class, 'create'])->name('admin.create.order');
@@ -56,8 +59,32 @@ Route::middleware('auth')->group(function () {
         Route::put('/admin/update/order/{id}', [OrderController::class, 'update'])->name('admin.update.order');
         Route::get('/admin/show/order/{id}', [OrderController::class, 'show'])->name('admin.show.order');
 
+
     });
+    Route::get('/checkout/index', [CheckoutController::class, 'index'])->name('checkout.index');
+    Route::post('/payment', [CheckoutController::class, 'setPayment']);
+    Route::get('/payment/success', [CheckoutController::class, 'successPayment']);
+    Route::get('/orders', [OrderController::class, 'simpleUserOrders'])->name('orders');
 });
+
+Route::get('/cart/items', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
+Route::delete('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
+
+
+Route::get('/users/test/model', function(){
+    $users = App\Models\User::all();
+    //dd($users);
+    return view('test');
+});
+
+Route::get('/users/test/selectDB', function(){
+    $users = DB::select('SELECT * FROM users');
+    //dd($users);
+    return view('test2');
+});
+
+
 
 require __DIR__.'/auth.php';
 

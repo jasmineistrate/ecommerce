@@ -1,6 +1,6 @@
 <div class="navigation">
         <div class="nav-left">
-        <div class="nav-element"><a class="clear-link" href=""></a></div>
+        <a href="{{route('landing')}}"><img src="{{asset('icons/logo.png')}}" class="w-8" alt=""></a>
         <div class="nav-element"><a class="clear-link" href=""></a></div>
         </div>
         <div class="nav-right">

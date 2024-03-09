@@ -18,7 +18,15 @@
                     <div class="product-price">
                         {{$product->price}} $
                     </div>
-                    <div class="add-button">Add to cart</div>
+                    <form action="{{route('cart.add')}}" method="POST">
+                        @csrf
+                        <input type="hidden" value = "{{$product->id}}" name="product_id">
+                        <input type="hidden" value = "{{$product->title}}" name="product_title">
+                        <input type="hidden" value = "{{$product->image}}" name="product_image">
+                        <input type="hidden" value = "{{$product->price}}" name="product_price">
+                        <input type="hidden" value = "{{$product->color}}" name="product_color">
+                        <button class="add-button w-40" type="submit" style="background-color:black" >Add to cart</button>
+                    </form>
                     </div>
                 </div></a>
                 @endforeach

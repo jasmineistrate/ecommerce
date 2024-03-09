@@ -27,7 +27,7 @@
 
         </textarea>
         <input type="file" name="image">
-        <button class="button-create-product" type="submit">Submit</button>
+        <button class="button-create-product bg-black" type="submit">Submit</button>
     </form>
 </div>
 

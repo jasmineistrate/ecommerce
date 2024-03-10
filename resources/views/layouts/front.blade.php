@@ -15,9 +15,11 @@
         <link rel="stylesheet" href= "{{asset('/css/cartStyle.css')}}">
         <link rel="stylesheet" href= "{{asset('/css/checkout.css')}}">
         <script src="https://cdn.tailwindcss.com"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         
     </head>
-    <body class="font-sans antialiased">
+    <body x-data="app()" class="font-sans antialiased">
             @if(session()->has('success'))
             <div class="success-message">
                 {{ session()->get('success') }}
@@ -36,4 +38,6 @@
             </div>
         </a>
     </body>
+    <!--<script src="{{asset('js/count.js')}}"></script>-->
+    <script src="{{asset('js/cart.js')}}"></script>
 </html>

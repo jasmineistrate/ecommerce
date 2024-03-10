@@ -65,6 +65,6 @@
                     <div id="payment-message" class="hidden"></div>
     </form>
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="{{asset('js/stripe.js')}}">
+    <script src="{{asset('js/stripe.js')}}"></script>
 
 @endsection

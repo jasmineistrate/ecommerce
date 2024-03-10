@@ -54,7 +54,6 @@ const stripePaymentMethodHandler = async (result) => {
         button.style.opacity = '1';
     } else {
         // Otherwise send paymentMethod.id to your server (see Step 4)
-        console.log('before fetch');
         const res = await fetch('/payment', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -65,7 +64,6 @@ const stripePaymentMethodHandler = async (result) => {
                 country: document.getElementById('country').value
             }),
         })
-        console.log('after fetch');
         const paymentResponse = await res.json();
         // Handle server response (see Step 4)
         handleServerResponse(paymentResponse);
@@ -73,7 +71,6 @@ const stripePaymentMethodHandler = async (result) => {
 }
 
 const handleServerResponse = async (response) => {
-    console.log(response);
     if (response.error) {
         const errorElement = document.getElementById('card-errors');
         errorElement.innerHTML = response.error;
@@ -101,7 +98,6 @@ const handleServerResponse = async (response) => {
             handleServerResponse(await serverResponse.json());
         }
     } else {
-        console.log('redirect');
         window.location.href = '/payment/success';
     }
 }

@@ -71,6 +71,10 @@ Route::get('/cart/items', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'store'])->name('cart.add');
 Route::delete('/cart/delete/{id}', [CartController::class, 'delete'])->name('cart.delete');
 
+Route::put('/update/quantity/cart/{id}', [CartController::class, 'updateQuantity']);
+Route::get('/cart/total', [CartController::class, 'cartTotal']);
+Route::post('/apply/discount', [CartController::class, 'applyDiscount']);
+Route::put('/remove/discount', [CartController::class, 'removeDiscount']);
 
 Route::get('/users/test/model', function(){
     $users = App\Models\User::all();

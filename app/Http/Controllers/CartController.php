@@ -75,9 +75,35 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function updateQuantity(Request $request, string $id)
     {
-        //
+        $updatedItem = Cart::name('shopping')->updateItem($id, [
+            'quantity' => intval($request->quantity)
+        ]);
+    }
+
+    public function cartTotal()
+    {
+        $total = Cart::name('shopping')->getDetails()->total;
+        return response()->json($total);
+    }
+
+    public function applyDiscount()
+    {
+        Cart::name('shopping')->applyAction([
+            'group'      => 'Discount',
+            'id'         => 1,
+            'title'      => 'Sale 10%',
+            'value'      => '-10%',
+            'extra_info' => [
+                'description' => 'Winter sale program'
+            ]
+        ]);
+    }
+
+    public function removeDiscount()
+    {
+        Cart::name('shopping')->clearActions();
     }
 
     /**

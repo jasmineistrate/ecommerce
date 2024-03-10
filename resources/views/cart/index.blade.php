@@ -20,7 +20,13 @@
                 </div>
             </td>
             <td class="cart-td">{{$cartItem->price}}</td>
-            <td class="cart-td">{{$cartItem->quantity}}</td>
+            <td class="cart-td">
+                <div class="flex gap-x-2 items-center">
+                    <img src="{{asset('icons/minus.png')}}" x-on:click="updateMinusQuantity('{{$cartItem->hash}}', '{{$cartItem->quantity}}')" class = "w-8 cursor-pointer hover:scale-105 ">
+                    <div id="{{$cartItem->hash}}">{{$cartItem->quantity}}</div>
+                    <img src="{{asset('icons/plus.png')}}" x-on:click="updatePlusQuantity('{{$cartItem->hash}}', '{{$cartItem->quantity}}')" class = "w-8 cursor-pointer hover:scale-105">
+                </div>
+            </td>
             <td class="cart-td">{{$cartItem->total_price}}$</td>
             <td class="cart-td">
                 <form action="{{route('cart.delete', $cartItem->hash)}}" method="POST">
@@ -33,7 +39,8 @@
         @endforeach
         <tr>
             <td colspan="3" class="cart-total">Total:</td>
-            <td class="cart-total">{{$cartItems->total}}$</td>
+            <td class="cart-total mt-4" x-text="'$' + totalPrice">
+            </td>
         </tr>
         </table>
     </div>

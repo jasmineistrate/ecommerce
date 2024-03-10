@@ -20,7 +20,7 @@ class CheckoutController extends Controller
 
     public function setPayment(Request $request)
     {
-        Stripe::setApiKey(env('STRIPE_SECRET'));
+        Stripe::setApiKey('sk_test_51OsKzECIXOl0WhuFvOmDY3BSHrNlT4tHBsbAVz4BztZrx0xIQNiMcKPMGlJOwIDZ2rVfXoSKpqUtzy0yRd3GVXQa00W5IpaeAi');
         $amountToInt = round(Cart::name('shopping')->getDetails()->total * 100, 0, PHP_ROUND_HALF_UP); 
         $intent = null;
         $json_str = file_get_contents('php://input');
@@ -103,7 +103,7 @@ class CheckoutController extends Controller
 
     public function successPayment()
     {
-        return view('back.checkout.payment');
+        return view('checkout.success');
     }
 
     /**
